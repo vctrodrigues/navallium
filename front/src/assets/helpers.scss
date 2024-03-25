@@ -1,0 +1,354 @@
+@import "./variables.scss";
+
+// spacing
+$spatial: 4px;
+
+@mixin margin($side: all, $value: 0) {
+  @if $side == all {
+    margin: $value * $spatial;
+  } @else if $side == top {
+    margin-top: $value * $spatial;
+  } @else if $side == right {
+    margin-right: $value * $spatial;
+  } @else if $side == bottom {
+    margin-bottom: $value * $spatial;
+  } @else if $side == left {
+    margin-left: $value * $spatial;
+  } @else if $side == x {
+    margin-left: $value * $spatial;
+    margin-right: $value * $spatial;
+  } @else if $side == y {
+    margin-top: $value * $spatial;
+    margin-bottom: $value * $spatial;
+  }
+}
+
+@mixin padding($side: all, $value: 0) {
+  @if $side == all {
+    padding: $value * $spatial;
+  } @else if $side == top {
+    padding-top: $value * $spatial;
+  } @else if $side == right {
+    padding-right: $value * $spatial;
+  } @else if $side == bottom {
+    padding-bottom: $value * $spatial;
+  } @else if $side == left {
+    padding-left: $value * $spatial;
+  } @else if $side == x {
+    padding-left: $value * $spatial;
+    padding-right: $value * $spatial;
+  } @else if $side == y {
+    padding-top: $value * $spatial;
+    padding-bottom: $value * $spatial;
+  }
+}
+
+@mixin gap($value: 0) {
+  gap: $value * $spatial;
+}
+
+$spacing: map-get($tokens, $key: "spacing");
+$padding: ("pa", "px", "py", "pt", "pr", "pb", "pl");
+
+@each $key, $value in $spacing {
+  @each $type in $padding {
+    .app-#{$type}--#{$key} {
+      @if $type == "pa" {
+        @include padding("all", $value);
+      } @else if $type == "py" {
+        @include padding("y", $value);
+      } @else if $type == "px" {
+        @include padding("x", $value);
+      } @else if $type == "pt" {
+        @include padding("top", $value);
+      } @else if $type == "pr" {
+        @include padding("right", $value);
+      } @else if $type == "pb" {
+        @include padding("bottom", $value);
+      } @else if $type == "pl" {
+        @include padding("left", $value);
+      }
+    }
+  }
+}
+
+$margin: ("ma", "mx", "my", "mt", "mr", "mb", "ml");
+
+@each $key, $value in $spacing {
+  @each $type in $margin {
+    .app-#{$type}--#{$key} {
+      @if $type == "ma" {
+        @include margin("all", $value);
+      } @else if $type == "my" {
+        @include margin("y", $value);
+      } @else if $type == "mx" {
+        @include margin("x", $value);
+      } @else if $type == "mt" {
+        @include margin("top", $value);
+      } @else if $type == "mr" {
+        @include margin("right", $value);
+      } @else if $type == "mb" {
+        @include margin("bottom", $value);
+      } @else if $type == "ml" {
+        @include margin("left", $value);
+      }
+    }
+  }
+}
+
+@each $key, $value in $spacing {
+  .app-gap--#{$key} {
+    @include gap($value);
+  }
+}
+
+// font
+$fontFamily: map-get($tokens, $key: "fontFamily");
+$fontFamilyMono: map-get($tokens, $key: "fontFamilyMono");
+$fontSizes: map-get($tokens, $key: "fontSizes");
+$fontWeights: map-get($tokens, $key: "fontWeights");
+$lineHeights: map-get($tokens, $key: "lineHeights");
+$letterSpacings: map-get($tokens, $key: "letterSpacings");
+
+@mixin fontStyle($style) {
+  @if $style == "heading-1--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xxxl");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "sm");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-1--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xxxl");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "sm");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-1--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xxxl");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "sm");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-2--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xxl");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-2--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xxl");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-2--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xxl");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-3--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xl");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-3--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xl");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-3--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "xl");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-4--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "lg");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-4--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "lg");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "heading-4--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "lg");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "label--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "label--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "label--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "default");
+  } @else if $style == "body--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "sm");
+  } @else if $style == "body--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "sm");
+  } @else if $style == "body--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "sm");
+  } @else if $style == "info--regular" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "sm");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "sm");
+    letter-spacing: map-get($letterSpacings, $key: "md");
+  } @else if $style == "info--semi-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "sm");
+    font-weight: map-get($fontWeights, $key: "semibold");
+    line-height: map-get($lineHeights, $key: "sm");
+    letter-spacing: map-get($letterSpacings, $key: "md");
+  } @else if $style == "info--extra-bold" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "sm");
+    font-weight: map-get($fontWeights, $key: "extrabold");
+    line-height: map-get($lineHeights, $key: "sm");
+    letter-spacing: map-get($letterSpacings, $key: "md");
+  } @else if $style == "mono--regular" {
+    font-family: $fontFamilyMono;
+    font-size: map-get($fontSizes, $key: "md");
+    font-weight: map-get($fontWeights, $key: "regular");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "sm");
+  } @else if $style == "initial" {
+    font-family: $fontFamily;
+    font-size: map-get($fontSizes, $key: "md");
+    line-height: map-get($lineHeights, $key: "md");
+    letter-spacing: map-get($letterSpacings, $key: "sm");
+  }
+}
+
+$font-tags: (
+  "heading-1",
+  "heading-2",
+  "heading-3",
+  "heading-4",
+  "label",
+  "body",
+  "info"
+);
+
+$font-types: ("regular", "semi-bold", "extra-bold");
+
+@each $tag in $font-tags {
+  @each $type in $font-types {
+    .app-#{$tag}--#{$type} {
+      @include fontStyle(#{$tag}--#{$type});
+    }
+  }
+}
+
+.app-capitalize {
+  text-transform: capitalize;
+}
+
+// colors
+$colors: map-get($tokens, $key: "colors");
+$color-properties: ("color", "bg", "bc");
+
+@each $color, $map in $colors {
+  @each $variation, $value in $map {
+    @each $prop in $color-properties {
+      .app-#{$prop}--#{"" + $color}-#{$variation} {
+        @if $prop == "color" {
+          color: $value;
+        } @else if $prop == "bg" {
+          background-color: $value;
+        } @else if $prop == "bc" {
+          border-color: $value;
+        }
+      }
+    }
+  }
+}
+
+.app-mono {
+  font-family: $fontFamilyMono;
+  letter-spacing: 8px;
+}
+
+// display
+.app-flex {
+  display: flex;
+}
+
+.app-row {
+  flex-direction: row;
+}
+
+.app-column {
+  flex-direction: column;
+}
+
+.app-justify-content--start {
+  justify-content: flex-start;
+}
+
+.app-justify-content--end {
+  justify-content: flex-end;
+}
+
+.app-justify-content--center {
+  justify-content: center;
+}
+
+.app-justify-content--space-between {
+  justify-content: space-between;
+}
+
+.app-justify-content--space-around {
+  justify-content: space-around;
+}
+
+.app-align-items--start {
+  align-items: flex-start;
+}
+
+.app-align-items--end {
+  align-items: flex-end;
+}
+
+.app-align-items--center {
+  align-items: center;
+}
+
+.app-align-items--stretch {
+  align-items: stretch;
+}
+
+.app-align-items--baseline {
+  align-items: baseline;
+}
